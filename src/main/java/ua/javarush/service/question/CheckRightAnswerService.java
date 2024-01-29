@@ -1,11 +1,11 @@
-package ua.javarush.service;
+package ua.javarush.service.question;
 
 import lombok.Getter;
 import ua.javarush.model.Answer;
 import ua.javarush.model.Question;
 
 @Getter
-public class CheckService {
+public class CheckRightAnswerService {
 
     private final QuestService questService;
     private Question question;
@@ -13,7 +13,7 @@ public class CheckService {
     private final boolean isRight;
     private String page;
 
-    private CheckService(Builder builder) {
+    private CheckRightAnswerService(Builder builder) {
         this.questService = builder.questService;
         this.question = builder.question;
         this.answer = builder.answer;
@@ -25,7 +25,7 @@ public class CheckService {
         return new Builder();
     }
 
-    public CheckService analyzeAnswer() {
+    public CheckRightAnswerService analyzeAnswer() {
         Answer answer = questService.getAnswer(question, isRight);
         Integer nextQuestionNumber = answer.getNextQuestionNumber();
         this.answer = answer;
@@ -41,7 +41,6 @@ public class CheckService {
 
             } else if (nextQuestionNumber == null) {
                 this.page = "/winPage.jsp";
-
             }
         }
         return this;
@@ -85,8 +84,8 @@ public class CheckService {
             return this;
         }
 
-        public CheckService build() {
-            return new CheckService(this);
+        public CheckRightAnswerService build() {
+            return new CheckRightAnswerService(this);
         }
     }
 }

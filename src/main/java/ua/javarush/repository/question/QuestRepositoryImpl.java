@@ -1,18 +1,19 @@
-package ua.javarush.repository;
+package ua.javarush.repository.question;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ua.javarush.model.Answer;
 import ua.javarush.model.Question;
-import ua.javarush.repository.QuestRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class QuestRepositoryImpl implements QuestRepository {
 
     private List<Question> allQuestions;
@@ -35,7 +36,7 @@ public class QuestRepositoryImpl implements QuestRepository {
 
     @Override
     public List<Question> getAll() {
-        return allQuestions;
+        return Collections.unmodifiableList(allQuestions);
     }
 
     @Override

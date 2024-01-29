@@ -1,6 +1,7 @@
-package ua.javarush.servlet;
+package ua.javarush.servlet.question;
 
-import ua.javarush.service.QuestService;
+import ua.javarush.ApplicationContext;
+import ua.javarush.service.question.QuestService;
 import ua.javarush.model.Question;
 
 import javax.servlet.ServletException;
@@ -13,10 +14,11 @@ import java.io.IOException;
 
 @WebServlet("/challengePage")
 public class StartChallengeServlet extends HttpServlet {
-    public QuestService questService = new QuestService();
+    private final QuestService questService = ApplicationContext.getInstanceOf(QuestService.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         HttpSession httpSession = req.getSession();
         String game = req.getParameter("game");
         questService.initChallenge(game);

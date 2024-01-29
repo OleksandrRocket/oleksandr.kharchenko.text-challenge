@@ -1,17 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%--  <link href="static/main.css" rel="stylesheet">--%>
-    <title>UFOQuest</title>
+    <title>Quests</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 <jsp:useBean id="question" scope="session" class="ua.javarush.model.Question"/>
-<jsp:useBean id="questService" scope="session" class="ua.javarush.service.QuestService"/>
-<%--  <jsp:useBean id="answer" scope="session" type="ua.javarush.model.Answer"/>--%>
+<jsp:useBean id="questService" scope="session" class="ua.javarush.service.question.QuestService"/>
 
 <h1><%= question.getText()%></h1>
 
@@ -25,7 +24,7 @@
     <label for="answer2"><%= questService.getAnswer(question, false).getText()%>
     </label>
     <br>
-    <input type="submit" value="Відповісти">
+    <input type="submit" value="Give an answer">
 </form>
 </body>
 </html>

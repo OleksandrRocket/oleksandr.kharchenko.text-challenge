@@ -1,32 +1,31 @@
-package ua.javarush.service;
+package ua.javarush.service.question;
 
 import com.google.gson.Gson;
+import lombok.extern.log4j.Log4j2;
+import ua.javarush.exception.ReadException;
 import ua.javarush.model.Answer;
 import ua.javarush.model.Question;
-import ua.javarush.repository.QuestRepository;
-import ua.javarush.repository.QuestRepositoryImpl;
+import ua.javarush.repository.question.QuestRepository;
+import ua.javarush.repository.question.QuestRepositoryImpl;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-
+@Log4j2
 public class QuestService {
 
     private QuestRepository questRepository;
-    private Gson g = new Gson();
 
     public QuestRepository initChallenge(String game) {
-
+        Gson g = new Gson();
         switch (game) {
             case "ufo":
-                try (FileReader fileReader = new FileReader("D:\\devtools\\IdeaProjects\\Text-challenge\\src\\main\\resources\\UFO.json")) {
+                try (FileReader fileReader = new FileReader("src/main/resources/ufo.json", StandardCharsets.UTF_8)) {
                     return questRepository = g.fromJson(fileReader, QuestRepositoryImpl.class);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new ReadException("Exception reading ufo.json");
                 }
             default:
                 throw new IllegalArgumentException();
@@ -50,9 +49,6 @@ public class QuestService {
     }
 
     public Optional<Question> continueQuest(Question question) {
-      return   questRepository.continueQuest(question);
-
+        return questRepository.continueQuest(question);
     }
 }
-
-

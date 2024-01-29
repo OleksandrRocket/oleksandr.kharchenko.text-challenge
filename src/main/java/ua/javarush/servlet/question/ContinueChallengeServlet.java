@@ -1,9 +1,8 @@
-package ua.javarush.servlet;
+package ua.javarush.servlet.question;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import ua.javarush.service.CheckService;
-import ua.javarush.service.QuestService;
+import lombok.extern.log4j.Log4j2;
+import ua.javarush.service.question.CheckRightAnswerService;
+import ua.javarush.service.question.QuestService;
 import ua.javarush.model.Question;
 
 import javax.servlet.ServletException;
@@ -15,28 +14,25 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/challengePage/*")
+@Log4j2
 public class ContinueChallengeServlet extends HttpServlet {
-
-    private static final Logger LOGGER = LogManager.getLogger(ContinueChallengeServlet.class.getSimpleName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         HttpSession currentSession = req.getSession();
         String value = req.getParameter("answer");
         boolean isRight = Boolean.parseBoolean(value);
-        LOGGER.debug(isRight);
         Question question = extractQuestion(currentSession);
         QuestService questService = extractQuestService(currentSession);
-        CheckService checkService = CheckService.builder()
+        CheckRightAnswerService checkRightAnswerService = CheckRightAnswerService.builder()
                 .withQuestService(questService)
                 .withQuestion(question)
                 .withIsRight(isRight)
                 .build()
                 .analyzeAnswer();
-        currentSession.setAttribute("questService", checkService.getQuestService());
-        currentSession.setAttribute("question", checkService.getQuestion());
-        req.getRequestDispatcher(checkService.getPage()).forward(req, resp);
+        currentSession.setAttribute("questService", checkRightAnswerService.getQuestService());
+        currentSession.setAttribute("question", checkRightAnswerService.getQuestion());
+        req.getRequestDispatcher(checkRightAnswerService.getPage()).forward(req, resp);
     }
 
     private Question extractQuestion(HttpSession currentSession) {
