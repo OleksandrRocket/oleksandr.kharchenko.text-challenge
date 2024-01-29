@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Ivan",
+    "dateBirth": "2001-10-01",
+    "email": "ivan@mail.com",
+    "password": "Ivan"
+  },
+  {
+    "name": "Vasia",
+    "dateBirth": "2002-11-02",
+    "email": "vasia@mail.com",
+    "password": "Vasia"
+  },
+  {
+    "name": "Maria",
+    "dateBirth": "2003-12-03",
+    "email": "maria@mail.com",
+    "password": "Maria"
+  }
+]

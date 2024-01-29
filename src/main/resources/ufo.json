@@ -1,0 +1,55 @@
+{
+  "allQuestions": [
+    {
+      "number": 1,
+      "text": "You are losing memory. Accept the UFO challenge?",
+      "answers": [
+        {
+          "id": 1,
+          "text": "Accept the challenge",
+          "nextQuestionNumber": 2,
+          "isRight": true
+        },
+        {
+          "id": 2,
+          "text": "Decline the challenge",
+          "finalText": "You declined the challenge. Game over."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "text": "You accepted the challenge. Go to the captain's bridge?",
+      "answers": [
+        {
+          "id": 1,
+          "text": "Go to the bridge",
+          "nextQuestionNumber": 3,
+          "isRight": true
+        },
+        {
+          "id": 2,
+          "text": "Refuse to go to the bridge",
+          "finalText": "You didn't go to negotiations. Game over."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "text": "You went to the bridge. Who are you?",
+      "answers": [
+        {
+          "id": 1,
+          "text": "Tell the truth about yourself",
+          "isRight": true,
+          "finalText": "You were sent back home. Victory"
+        },
+        {
+          "id": 2,
+          "text": "Lie about yourself",
+          "finalText": "Your lie was exposed. Game over."
+        }
+      ]
+    }
+  ]
+}
